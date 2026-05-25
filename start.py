@@ -5,10 +5,6 @@ from main import combat, generate
 from random import randint, choice
 from os import system
 
-
-# Functions
-               
-
 # Test
 HERO = generate.generate_hero()
-combat.combat_loop()
+combat.combat_loop(HERO)

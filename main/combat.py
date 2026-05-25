@@ -3,7 +3,6 @@ from random import randint
 from os import system
 from main import generate
 from chars import enemy, hero
-import start
 
 # Colors
 COLOR_RESET = '\033[0m'
@@ -20,9 +19,7 @@ COLOR_BOLD = '\033[1m'
 def clear():
     system('cls')
 
-def combat_loop():
-    global HERO
-
+def combat_loop(HERO):
     proceed = True
     while proceed:
         clear()
@@ -38,13 +35,13 @@ def combat_loop():
             input("Press Enter to continue...")
             continue
     
-    while start.HERO._health > 0 and MONSTER._health > 0:
+    while HERO._health > 0 and MONSTER._health > 0:
         clear()
         print(f"{COLOR_GRAY}════════════════════════════════════════{COLOR_RESET}")
-        print(f" 🦸 CHARACTER: {COLOR_GREEN}{start.HERO._user_class:<24}{COLOR_RESET} ")
+        print(f" 🦸 CHARACTER: {COLOR_GREEN}{HERO._user_class:<24}{COLOR_RESET} ")
         print(f"{COLOR_GRAY}════════════════════════════════════════{COLOR_RESET}")
-        print(f"❤️  HP: {start.HERO._health} ║ {start.start.HERO.hp}")
-        print(f"⚔️  DAMAGE: {start.HERO._damage:<25}")
+        print(f"❤️  HP: {HERO._health} ║ {HERO.hp}")
+        print(f"⚔️  DAMAGE: {HERO._damage:<25}")
         print(f"{COLOR_GRAY}════════════════════════════════════════{COLOR_RESET}")
         
         # Separator
@@ -60,7 +57,7 @@ def combat_loop():
 
         action = input("\n[1] Attack\n> ")
         if action == '1':
-            damage, is_critical = start.HERO.attack()
+            damage, is_critical = HERO.attack()
 
             if is_critical: 
                 print(f'\n{COLOR_YELLOW}💥CRITICAL HIT!{COLOR_RESET} You attack the {MONSTER._name} for {damage} damage!')
@@ -82,9 +79,9 @@ def combat_loop():
             print(f"The {MONSTER._name} attacks you for {damage} damage!")
         
 
-        start.HERO._health -= damage
+        HERO._health -= damage
         
-        if start.HERO._health <= 0:
+        if HERO._health <= 0:
             print("You have been defeated...")
             break
             
