@@ -16,12 +16,16 @@ COLOR_GRAY = '\033[90m'
 COLOR_BOLD = '\033[1m'
 
 class Enemy():
-    def __init__(self, name: str, damage: float, health: float):
-        self._name = name
-        self._damage = damage
-        self._max_hp = health
-        self._health = health
-
+    def __init__(self):
+        super().__init__(
+            name='',
+            attack_damage=0,
+            health=100,
+            defense=0,
+            agility=10,
+            critical_chance=10,
+            critical_attack_damage=50
+        )
     def attack(self):
         is_critical = randint(1, 100) <= 10
         multiplier = 1.5 if is_critical else 1.0

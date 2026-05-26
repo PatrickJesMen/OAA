@@ -2,6 +2,7 @@
 
 # Imports
 from random import randint
+from chars import character
 
 # Colors
 COLOR_RESET = '\033[0m'
@@ -16,18 +17,24 @@ COLOR_GRAY = '\033[90m'
 COLOR_BOLD = '\033[1m'
 
 # Class
-class User():
-    def __init__(self, user_class: str, damage: float, health: float):
-        self._user_class = user_class
-        self._damage = damage
-        self._max_hp = health
-        self._health = health
+class User(character):
+    def __init__(self):
+        super().__init__(
+            name='',
+            attack_damage=0,
+            health=100,
+            defense=0,
+            agility=10,
+            critical_chance=10,
+            critical_attack_damage=50
+        )
+
 
     def attack(self):
         is_critical = randint(1, 100) <= 20
         multiplier = 1.5 if is_critical else 1.0
-        damage_dealt = int(self._damage * multiplier)
-        return damage_dealt, is_critical
+        attack_damage_dealt = int(self._attack_damage * multiplier)
+        return attack_damage_dealt, is_critical
     
     @property
     def hp(self):

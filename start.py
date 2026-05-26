@@ -1,10 +1,13 @@
 # OOP project
-from main import combat, generate
 
 # Imports
+from main import combat, generate, status
 from random import randint, choice
 from os import system
 
 # Test
-HERO = generate.generate_hero()
-combat.combat_loop(HERO)
+hero_stats = status.status("hero")
+enemy_stats = status.status("enemy")
+
+print("Hero Stats:", hero_stats)
+print("Enemy Stats:", enemy_stats)
