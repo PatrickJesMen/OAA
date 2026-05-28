@@ -27,16 +27,25 @@ class User(Character):
         self._xp += amount
         print(f'\nYou gained {amount} XP!')
 
+        while self._xp >= self._xp_to_next_level:
+            self.level_up()
+
     def status(self):
-        self._health += int((self._health/100)*10)
-        self._attack_damage += int((self._attack_damage/100)*10)
-        self._defense += int((self._defense/100)*10)
-        self._agility += int((self._agility/100)*10)
+        self._max_hp += max(1, int(self._max_hp * 0.10))
+        self._health = self._max_hp
+        
+        self._attack_damage += max(1, int(self._attack_damage * 0.10))
+        self._defense += max(1, int(self._defense * 0.10))
+        self._agility += max(1, int(self._agility * 0.10))
 
     def level_up(self):
         self._xp -= self._xp_to_next_level
         self._level += 1
         self._xp_to_next_level = int(self._xp_to_next_level * 1.5)
+
+        print(f"\n🎉 LEVEL UP! You are now Level {self._level}!")
+        self.status()
+
 
 
 
